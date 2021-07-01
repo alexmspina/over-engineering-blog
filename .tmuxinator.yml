@@ -52,5 +52,6 @@ windows:
       # synchronize: after
       panes:
         - npm run dev
-        - cd sanity-studio && sanity start
-        - 
+        - z over-engineering-sanity-studio && sanity start
+        -
+        - z over-engineering-sanity-studio
