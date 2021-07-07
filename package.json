@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx jest --watch --coverage"
+    "tests": "npx jest --all --watch --coverage"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.4",
