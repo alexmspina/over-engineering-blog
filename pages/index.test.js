@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Home, { getStaticProps } from './index';
-import PageLayout from '../components/PageLayout/PageLayout';
 import { getClient, overlayDrafts } from '../sanity/sanity.server';
 import { authorAvatarImageQuery, indexQuery } from '../sanity/queries';
 
@@ -13,8 +12,8 @@ const posts = [
     _type: 'post',
     _updatedAt: '2021-07-01T15:48:52Z',
     author: {
-      _ref: '3840c4c8-0fb4-4d49-9c1b-9485bbc668b0',
-      _type: 'reference',
+      imageUrl: '../assets/avatar.jpg',
+      name: 'Test Author',
     },
     body: [
       {
@@ -41,12 +40,8 @@ const posts = [
     ],
     excerpt:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    mainImage: {
-      _type: 'image',
-      asset: {
-        _ref: 'image-0360990f1ff00e0e9f107b25af8e0943d8ba2a94-5184x3456-jpg',
-        _type: 'reference',
-      },
+    featuredImage: {
+      imageUrl: '../assets/featuredImage.jpg',
     },
     slug: {
       _type: 'slug',
@@ -100,6 +95,8 @@ class MockSanityClient {
 jest.mock('../sanity/sanity.server');
 
 describe('Home', () => {
+  let container;
+
   beforeEach(() => {
     process.env = {
       ...process.env,
@@ -108,11 +105,16 @@ describe('Home', () => {
       SANITY_API_TOKEN: 'token',
       SANITY_PREVIEW_SECRET: 'secret',
     };
+
+    container = shallow(<Home allPosts={posts} />);
   });
 
   it('should render a PageLayout component', () => {
-    const container = shallow(<Home />);
-    expect(container.containsMatchingElement(<PageLayout />)).toEqual(true);
+    expect(container.find('PageLayout').length).toEqual(1);
+  });
+
+  it('should render a FeaturedPostPreview component', () => {
+    expect(container.find('FeaturedPostPreview').length).toEqual(1);
   });
 });
 

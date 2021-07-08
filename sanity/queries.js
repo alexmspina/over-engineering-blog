@@ -1,12 +1,13 @@
 const postFields = `
   _id,
+  "publishedDate": _createdAt,
   title,
   publishedAt,
   excerpt,
-  mainImage,
+  "featuredImage": {"imageUrl": mainImage.asset->url},
   body,
   "slug": slug.current,
-  "author": author->{name, image},
+  "author": author->{name, "imageUrl": image.asset->url},
 `;
 
 export const indexQuery = `

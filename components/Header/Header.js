@@ -6,8 +6,8 @@ export default function Header({ currentUser }) {
 
   return (
     <Flex justify={'space-between'}>
-      <Heading>Over Engineering</Heading>
-      <Avatar name={currentUser.name} src={imageUrl} />
+      <Heading size={'4xl'}>Over Engineering</Heading>
+      <Avatar size={'lg'} name={currentUser.name} src={imageUrl} />
     </Flex>
   );
 }

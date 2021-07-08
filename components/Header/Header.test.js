@@ -20,7 +20,7 @@ describe('Header', () => {
     expect(container.containsAllMatchingElements([<Heading />, <Avatar />]));
   });
 
-  it('should render the Avatar component with the avatar.jpg from the assets test image folder', () => {
+  it('should render the Avatar component with the avatar.jpg image from the assets test image folder', () => {
     expect(container.find('Avatar').prop('src')).toEqual(currentUser.imageUrl);
   });
 
