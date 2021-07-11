@@ -116,6 +116,17 @@ describe('Home', () => {
   it('should render a FeaturedPostPreview component', () => {
     expect(container.find('FeaturedPostPreview').length).toEqual(1);
   });
+
+  it('should render a Spacer component between the FeaturedPostPreview and PostPreviewGrid', () => {
+    expect(container.find('.featured-post-post-grid-spacer').length).toEqual(1);
+    expect(container.find('.featured-post-post-grid-spacer').prop('p')).toEqual(
+      '3%'
+    );
+  });
+
+  it('should render a PostPreviewGrid', () => {
+    expect(container.find('PostPreviewGrid').length).toEqual(1);
+  });
 });
 
 describe('getStaticProps', () => {

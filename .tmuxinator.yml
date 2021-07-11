@@ -51,7 +51,7 @@ windows:
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - codin ~/VS\ Code\ Workspaces/overengineering.code-workspace
+        - codin ~/VS\ Code\ Workspaces/overengineering.code-workspace && safari http://localhost:3000 && safari http://localhost:3333
         - z over-engineering-sanity-studio
   - tests: npm run tests
   - devservers:

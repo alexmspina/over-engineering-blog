@@ -1,8 +1,19 @@
 import React from 'react';
-import { Avatar, Flex, Heading, Image, Spacer, Text } from '@chakra-ui/react';
+import {
+  AspectRatio,
+  Avatar,
+  Grid,
+  GridItem,
+  Flex,
+  Heading,
+  Image,
+  Spacer,
+  Text,
+} from '@chakra-ui/react';
+import FeaturedImage from '../FeaturedImage/FeaturedImage';
 import FeaturedImageAndAuthorAvatar from '../FeaturedImageAndAuthorAvatar/FeaturedImageAndAuthorAvatar';
 
-export default function FeaturedPostPreview({ post }) {
+export default function PostPreview({ post }) {
   const publishedDateString = post.publishedDate;
   const featuredImageUrl = post.featuredImageUrl;
   const image = { imageSrc: featuredImageUrl };
@@ -22,24 +33,26 @@ export default function FeaturedPostPreview({ post }) {
   const publishedDate = `${publishedMonth} ${publishedDay}, ${publishedYear}`;
 
   return (
-    <Flex direction={'row'} justify={'space-between'} w="100%">
+    <Flex
+      className={'post-preview-column'}
+      direction={'column'}
+      justify={'space-between'}
+      w="30%"
+    >
       <FeaturedImageAndAuthorAvatar author={author} image={image} />
-      <Spacer className={'image-content-spacer'} p={'1%'} />
-      <Flex direction={'column'} justify={'start'} w="50%">
-        <Heading as={'h2'} size={'2xl'}>
-          {title}
-        </Heading>
-        <Spacer className={'title-excerpt-spacer'} p={'1%'} />
-        <Text className={'excerpt'} fontSize={'3xl'}>
-          {excerpt}
-        </Text>
-        <Spacer className={'excerpt-date-spacer'} p={'1%'} />
-        <Flex direction={'row'} justify={'space-between'}>
-          <Text className={'published-date'} fontSize={'xl'}>
-            {publishedDate}
-          </Text>
-        </Flex>
-      </Flex>
+      <Spacer className={'image-date-spacer'} p={'0.25%'} />
+      <Text className={'published-date'} fontSize={'md'}>
+        {publishedDate}
+      </Text>
+      <Spacer className={'date-title-spacer'} p={'0.25%'} />
+      <Heading as={'h2'} size={'lg'}>
+        {title}
+      </Heading>
+      <Spacer className={'title-excerpt-spacer'} p={'0.25%'} />
+      <Text className={'excerpt'} fontSize={'lg'}>
+        {excerpt}
+      </Text>
+      <Spacer className={'preview-bottom-spacer'} p={'5%'} />
     </Flex>
   );
 }
