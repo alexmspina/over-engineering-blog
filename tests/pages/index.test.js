@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Home, { getStaticProps } from './index';
-import { getClient, overlayDrafts } from '../sanity/sanity.server';
-import { authorAvatarImageQuery, indexQuery } from '../sanity/queries';
+import Home, { getStaticProps } from '../../pages/index';
+import { getClient, overlayDrafts } from '../../sanity/sanity.server';
+import { authorAvatarImageQuery, indexQuery } from '../../sanity/queries';
 
 const posts = [
   {
@@ -92,7 +92,7 @@ class MockSanityClient {
   }
 }
 
-jest.mock('../sanity/sanity.server');
+jest.mock('../../sanity/sanity.server');
 
 describe('Home', () => {
   let container;
