@@ -65,6 +65,15 @@ jobs:
       - name: Push tag to GitHub
         shell: bash
         run: git tag $RELEASE_TAG && git push --tags
+      
+      - name: Generate node environment file
+        shell: bash
+        run: |-
+          touch .env.production
+          echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}" >> .env.production
+          echo "SANITY_API_TOKEN=${{ secrets.SANITY_API_TOKEN }}" >> .env.production
+          echo "SANITY_PREVIEW_SECRET=${{ secrets.SANITY_PREVIEW_SECRET }}" >> .env.production
 
       - name: Build and tag image
         run: |-
