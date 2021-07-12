@@ -19,4 +19,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --save-dev
-      - run: npm test
+      - run: npm run tests

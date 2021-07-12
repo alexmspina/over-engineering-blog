@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "lint": "next lint",
-    "tests": "npx jest --watchAll --coverage --no-cache",
+    "tests": "npx jest --no-cache",
+    "watch-tests": "npx jest --watchAll --coverage --no-cache",
     "get-version": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && echo $PACKAGE_VERSION"
   },
   "dependencies": {
