@@ -58,6 +58,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Set release tag
+        uses: actions/setup-node@v2
         env:
           RELEASE_TAG: ${{ npm run --silen get-version }}
 
