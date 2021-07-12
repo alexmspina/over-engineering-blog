@@ -28,7 +28,6 @@ jobs:
       - run: npm ci --save-dev
       - run: npm run build --if-present
       - run: npm test
-  
 
   tag-build-and-deploy:
     name: Setup, Build, and Deploy
@@ -53,19 +52,19 @@ jobs:
           gcloud services enable run.googleapis.com
           gcloud --quiet auth configure-docker
 
-     - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }} 
+          node-version: ${{ matrix.node-version }}
 
       - name: Set release tag
         env:
-          RELEASE_TAG: ${{ npm run --silen get-version }}         
-      
+          RELEASE_TAG: ${{ npm run --silen get-version }}
+
       - name: Push tag to GitHub
         shell: bash
         run: git tag $RELEASE_TAG && git push --tags
-      
+
       - name: Generate node environment file
         shell: bash
         run: |-
