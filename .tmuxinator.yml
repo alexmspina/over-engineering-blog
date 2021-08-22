@@ -53,7 +53,7 @@ windows:
       panes:
         - codin ~/VS\ Code\ Workspaces/overengineering.code-workspace && safari http://localhost:3000 && safari http://localhost:3333
         - z over-engineering-sanity-studio
-  - tests: npm run tests
+  - tests: npm run watch-tests
   - devservers:
       layout: even-horizontal
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.

@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import PostPreviewGrid from './PostPreviewGrid';
-import { expect } from '@jest/globals';
 
 const posts = [
   {
-    _createdAt: '2021-06-29T21:26:19Z',
+    publishedDate: '2021-06-29T21:26:19Z',
     id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
@@ -49,7 +48,7 @@ const posts = [
     title: 'Post 1',
   },
   {
-    _createdAt: '2021-06-29T21:26:19Z',
+    publishedDate: '2021-06-29T21:26:19Z',
     id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4-2',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
@@ -97,7 +96,9 @@ const posts = [
 describe('PostPreviewGrid', () => {
   let container;
 
-  beforeEach(() => (container = shallow(<PostPreviewGrid posts={posts} />)));
+  beforeEach(() => {
+    container = shallow(<PostPreviewGrid posts={posts} />);
+  });
 
   it('should render a Flex column and wrap children post previews', () => {
     expect(container.find('Flex').length).toEqual(1);

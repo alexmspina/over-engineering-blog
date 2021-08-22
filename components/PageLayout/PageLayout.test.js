@@ -1,17 +1,33 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from '../Header/Header';
 import { Flex, Spacer } from '@chakra-ui/react';
+import Header from '../Header/Header';
 import PageLayout from './PageLayout';
+
+const currentUser = {
+  name: 'Dwayne Johnson',
+  imageUrl: '../../assets/testImages/avatar.jpg',
+};
 
 describe('PageLayout', () => {
   let container;
 
-  beforeEach(() => (container = shallow(<PageLayout />)));
+  beforeEach(() => {
+    container = shallow(
+      <PageLayout currentUser={currentUser}>
+        <div>Child!</div>
+        <div>Child!</div>
+      </PageLayout>
+    );
+  });
 
   it('should render 2 Flex components, 3 Spacer components, and a Header component', () => {
     expect(
-      container.containsAllMatchingElements([<Flex />, <Spacer />, <Header />])
+      container.containsAllMatchingElements([
+        <Flex />,
+        <Spacer />,
+        <Header currentUser={currentUser} />,
+      ])
     );
   });
 

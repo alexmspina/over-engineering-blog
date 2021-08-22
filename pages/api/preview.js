@@ -1,4 +1,12 @@
+import { createClient } from 'next-sanity';
+import sanityConfig from '../../sanity/config';
 import { postBySlugQuery } from '../../sanity/queries';
+
+export const previewClient = createClient({
+  ...sanityConfig,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+});
 
 export default async function preview(req, res) {
   // Check the secret and next parameters
@@ -27,4 +35,5 @@ export default async function preview(req, res) {
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
   res.writeHead(307, { Location: `/posts/${post.slug}` });
   res.end();
+  return res;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ChakraProvider } from '@chakra-ui/react';
 
 function MyApp({ Component, pageProps }) {
@@ -10,3 +11,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
+MyApp.propTypes = {
+  Component: PropTypes.func.isRequired,
+};

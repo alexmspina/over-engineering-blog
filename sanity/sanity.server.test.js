@@ -5,7 +5,7 @@ import { createClient } from 'next-sanity';
 const posts = [
   {
     _createdAt: '2021-06-29T21:26:19Z',
-    _id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
+    id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
     _updatedAt: '2021-07-01T15:48:52Z',
@@ -53,7 +53,7 @@ const posts = [
   },
   {
     _createdAt: '2021-06-29T21:26:19Z',
-    _id: 'drafts.d1c4605a-597a-4e42-b410-a822ae3c0cd4-2',
+    id: 'drafts.d1c4605a-597a-4e42-b410-a822ae3c0cd4-2',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
     _updatedAt: '2021-07-01T15:48:52Z',
@@ -104,7 +104,7 @@ const posts = [
 const expectedPosts = [
   {
     _createdAt: '2021-06-29T21:26:19Z',
-    _id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
+    id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
     _updatedAt: '2021-07-01T15:48:52Z',
@@ -202,7 +202,7 @@ const postsMissingID = [
   },
   {
     _createdAt: '2021-06-29T21:26:19Z',
-    _id: 'drafts.d1c4605a-597a-4e42-b410-a822ae3c0cd4-2',
+    id: 'drafts.d1c4605a-597a-4e42-b410-a822ae3c0cd4-2',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
     _updatedAt: '2021-07-01T15:48:52Z',
@@ -264,7 +264,7 @@ describe('overlayDrafts', () => {
   it('should throw error because of missing document ID', () => {
     expect(() => {
       overlayDrafts(postsMissingID);
-    }).toThrowError('Ensure that `_id` is included in query projection');
+    }).toThrowError('Ensure that `id` is included in query projection');
   });
 });
 

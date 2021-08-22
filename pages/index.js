@@ -1,44 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Spacer } from '@chakra-ui/react';
 import FeaturedPostPreview from '../components/FeaturedPostPreview/FeaturedPostPreview';
 import PageLayout from '../components/PageLayout/PageLayout';
 import { indexQuery, authorAvatarImageQuery } from '../sanity/queries';
 import { getClient, overlayDrafts } from '../sanity/sanity.server';
-import { Spacer } from '@chakra-ui/react';
 import PostPreviewGrid from '../components/PostPreviewGrid/PostPreviewGrid';
 
 export default function Home({ allPosts, currentUser }) {
-  const posts = allPosts.reduce((array, post) => {
-    const postPreviewProps = {
-      id: post._id,
-      publishedDate: post.publishedDate,
-      featuredImageUrl: post.featuredImage.imageUrl,
-      authorImageUrl: post.author.imageUrl,
-      authorName: post.authorName,
-      title: post.title,
-      excerpt: post.excerpt,
-    };
-
-    array.push(postPreviewProps);
-
-    return array;
-  }, []);
-
-  const featuredPostPreview = posts.shift();
-
+  const featuredPost = [...allPosts][0];
+  const posts = [...allPosts].slice(1, allPosts.length);
   return (
     <PageLayout currentUser={currentUser}>
-      <FeaturedPostPreview post={featuredPostPreview} />
-      <Spacer className={'featured-post-post-grid-spacer'} p={'3%'} />
+      <FeaturedPostPreview post={featuredPost} />
+      <Spacer className="featured-post-post-grid-spacer" p="3%" />
       <PostPreviewGrid posts={posts} />
     </PageLayout>
   );
 }
 
 export async function getStaticProps({ preview = false }) {
-  const allPosts = overlayDrafts(await getClient(preview).fetch(indexQuery));
+  const client = getClient(preview);
+  const allPosts = overlayDrafts(await client.fetch(indexQuery));
 
   const currentUser = await getClient(preview).fetch(authorAvatarImageQuery);
   return {
     props: { allPosts, preview, currentUser },
   };
 }
+
+Home.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  }).isRequired,
+  allPosts: PropTypes.arrayOf(
+    PropTypes.shape({
+      author: PropTypes.shape({
+        imageUrl: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+      excerpt: PropTypes.string.isRequired,
+      featuredImage: PropTypes.shape({
+        imageUrl: PropTypes.string.isRequired,
+      }).isRequired,
+      publishedDate: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+};

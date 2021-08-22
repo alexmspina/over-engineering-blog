@@ -4,23 +4,20 @@ import FeaturedImageAndAuthorAvatar from './FeaturedImageAndAuthorAvatar';
 
 describe('FeaturedImageAndAuthorAvatar', () => {
   let container;
-  const imageSrc = '../../assets/testImages/featuredImage.jpg';
-  const image = { imageSrc };
+  const imageUrl = '../../assets/testImages/featuredImage.jpg';
+  const image = { imageUrl };
   const authorName = 'Test Author';
-  const authorImageSrc = '../../assets/testImages/avatar.jpg';
-  const author = { name: authorName, imageSrc: authorImageSrc };
+  const authorImageUrl = '../../assets/testImages/avatar.jpg';
+  const author = { name: authorName, imageUrl: authorImageUrl };
 
-  beforeEach(
-    () =>
-      (container = shallow(
-        <FeaturedImageAndAuthorAvatar image={image} author={author} />
-      ))
-  );
+  beforeEach(() => {
+    container = shallow(
+      <FeaturedImageAndAuthorAvatar image={image} author={author} />
+    );
+  });
 
   it('should render a FeaturedImage with the correct imageSrc', () => {
-    expect(container.find('FeaturedImage').prop('imageSrc')).toEqual(
-      image.imageSrc
-    );
+    expect(container.find('FeaturedImage').prop('imageUrl')).toEqual(imageUrl);
   });
 
   it('should render a Grid component with 1 column and 1 row and it contains 2 children', () => {
@@ -71,7 +68,7 @@ describe('FeaturedImageAndAuthorAvatar', () => {
 
   it('should render the Avatar component', () => {
     expect(container.find('Avatar').length).toEqual(1);
-    expect(container.find('Avatar').prop('src')).toEqual(author.imageSrc);
-    expect(container.find('Avatar').prop('name')).toEqual(author.name);
+    expect(container.find('Avatar').prop('src')).toEqual(authorImageUrl);
+    expect(container.find('Avatar').prop('name')).toEqual(authorName);
   });
 });

@@ -1,16 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Header from './Header';
 import { Avatar, Heading } from '@chakra-ui/react';
+import Header from './Header';
 
 describe('Header', () => {
-  let currentUser = {
+  const currentUser = {
     name: 'Test Avatar',
     imageUrl: '../../assets/testImages/avatar.jpg',
   };
   let container;
 
-  beforeEach(() => (container = shallow(<Header currentUser={currentUser} />)));
+  beforeEach(() => {
+    container = shallow(<Header currentUser={currentUser} />);
+  });
 
   it('should render a <Flex>', () => {
     expect(container.find('Flex').length).toEqual(1);

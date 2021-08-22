@@ -2,7 +2,7 @@ import {
   createImageUrlBuilder,
   createPreviewSubscriptionHook,
 } from 'next-sanity';
-import { sanityConfig } from './config';
+import sanityConfig from './config';
 
 export const imageBuilder = createImageUrlBuilder(sanityConfig);
 

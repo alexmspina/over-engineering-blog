@@ -4,7 +4,7 @@
  * code that is not used on the client side.
  */
 import { createClient } from 'next-sanity';
-import { sanityConfig } from './config';
+import sanityConfig from './config';
 
 export const getClient = (preview) => {
   if (preview) {
@@ -13,25 +13,25 @@ export const getClient = (preview) => {
       useCdn: false,
       token: process.env.SANITY_API_TOKEN,
     });
-  } else {
-    return createClient(sanityConfig);
   }
+  return createClient(sanityConfig);
 };
 
 export function overlayDrafts(documents = []) {
   const overlayed = documents.reduce((map, doc) => {
-    if (!doc._id) {
-      throw new Error('Ensure that `_id` is included in query projection');
+    console.log(doc);
+    const { id: docId } = doc;
+    if (!docId) {
+      throw new Error('Ensure that `id` is included in query projection');
     }
 
-    const isDraft = doc._id.startsWith('drafts.');
-    const id = isDraft ? doc._id.slice(7) : doc._id;
+    const isDraft = docId.startsWith('drafts.');
+    const id = isDraft ? docId.slice(7) : docId;
 
     if (isDraft) {
       return map;
-    } else {
-      return map.set(id, doc);
     }
+    return map.set(id, doc);
   }, new Map());
 
   return Array.from(overlayed.values());
