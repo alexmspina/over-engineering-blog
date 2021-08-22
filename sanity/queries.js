@@ -1,5 +1,5 @@
 const postFields = `
-  _id,
+  "id": _id,
   "publishedDate": _createdAt,
   title,
   publishedAt,

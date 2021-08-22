@@ -6,8 +6,8 @@ import { authorAvatarImageQuery, indexQuery } from '../../sanity/queries';
 
 const posts = [
   {
-    _createdAt: '2021-06-29T21:26:19Z',
-    _id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
+    publishedDate: '2021-06-29T21:26:19Z',
+    id: 'd1c4605a-597a-4e42-b410-a822ae3c0cd4',
     _rev: 'JaQUesOtC6McJIPq0dI55W',
     _type: 'post',
     _updatedAt: '2021-07-01T15:48:52Z',
@@ -53,7 +53,7 @@ const posts = [
 
 const author = {
   _createdAt: '2021-06-29T21:25:45Z',
-  _id: 'test',
+  id: 'test',
   _rev: 'test',
   _type: 'author',
   _updatedAt: '2021-06-29T21:25:45Z',
@@ -71,6 +71,11 @@ const author = {
   },
 };
 
+const currentUser = {
+  name: 'Dwayne Johnson',
+  imageUrl: '../../assets/testImages/avatar.jpg',
+};
+
 class MockSanityClient {
   constructor(preview) {
     this.preview = preview;
@@ -79,13 +84,9 @@ class MockSanityClient {
   async fetch(query) {
     switch (query) {
       case indexQuery:
-        return new Promise((resolve) => {
-          return resolve(posts);
-        });
+        return new Promise((resolve) => resolve(posts));
       case authorAvatarImageQuery:
-        return new Promise((resolve) => {
-          return resolve(author);
-        });
+        return new Promise((resolve) => resolve(author));
       default:
         return { error: 'query not found' };
     }
@@ -106,7 +107,7 @@ describe('Home', () => {
       SANITY_PREVIEW_SECRET: 'secret',
     };
 
-    container = shallow(<Home allPosts={posts} />);
+    container = shallow(<Home allPosts={posts} currentUser={currentUser} />);
   });
 
   it('should render a PageLayout component', () => {
@@ -131,15 +132,13 @@ describe('Home', () => {
 
 describe('getStaticProps', () => {
   beforeAll(() => {
-    getClient.mockImplementation(() => {
-      return new MockSanityClient(false);
-    });
+    getClient.mockImplementation(() => new MockSanityClient(false));
 
     overlayDrafts.mockImplementation(() => posts);
   });
 
-  it("should return a list of posts and the current user's name and image reference", async () => {
-    return getStaticProps({ preivew: false }).then((props) => {
+  it("should return a list of posts and the current user's name and image reference", async () =>
+    getStaticProps({ preivew: false }).then((props) => {
       expect(props).toEqual({
         props: {
           allPosts: posts,
@@ -147,6 +146,5 @@ describe('getStaticProps', () => {
           preview: false,
         },
       });
-    });
-  });
+    }));
 });
